@@ -1,8 +1,8 @@
 # 24f2009046@ds.study.iitm.ac.in
 
-# Cell 1: Define a base variable and UI slider widget for interactivity
 import marimo as mo
 
+# Cell 1: Define a base variable and UI slider widget for interactivity
 # Create a slider widget to interactively select a multiplier value
 multiplier = mo.ui.slider(min=1, max=10, step=1, value=5)
 
@@ -14,6 +14,15 @@ base_value = 10
 result = base_value * multiplier
 
 # Cell 3: Display dynamic markdown output that updates with the slider
-# This markdown reflects the current value of 'result'
-mo.markdown(f"### Computed Result\n\nThe current result of {base_value} multiplied by the slider value {multiplier} is **{result}**.")
+# Use mo.md() to render markdown dynamically
+mo.md(f"""
+### Computed Result
+
+The base value is {base_value}.
+
+The slider multiplier is currently {multiplier}.
+
+The resulting value is **{result}**.
+""")
+
 
