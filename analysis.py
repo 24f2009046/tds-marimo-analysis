@@ -9,7 +9,7 @@ app = mo.App()
 # ---------------------------
 @app.cell
 def cell1():
-    # Create a slider widget to select multiplier (1–10)
+    # Slider widget to select multiplier (1–10)
     multiplier = mo.ui.slider(start=1, stop=10, step=1, value=5, label="Multiplier")
     base_value = 10
     return multiplier, base_value
@@ -19,7 +19,7 @@ def cell1():
 # ---------------------------
 @app.cell
 def cell2(multiplier, base_value):
-    # Depends on: multiplier (Cell 1), base_value (Cell 1)
+    # Depends on multiplier (Cell 1), base_value (Cell 1)
     result = base_value * multiplier.value
     return result
 
@@ -28,16 +28,14 @@ def cell2(multiplier, base_value):
 # ---------------------------
 @app.cell
 def cell3(multiplier, base_value, result):
-    # This will update automatically when slider is moved
-    return mo.md(
-        f"""
-        ### Computed Result  
+    # This markdown updates whenever multiplier changes
+    return mo.md(f"""
+    ### Computed Result
 
-        Base value: **{base_value}**  
-        Multiplier (from slider): **{multiplier.value}**  
-        Result: **{result}**
-        """
-    )
+    - Base value: **{base_value}**
+    - Multiplier (from slider): **{multiplier.value}**
+    - Result: **{result}**
+    """)
 
 if __name__ == "__main__":
     app.run()
