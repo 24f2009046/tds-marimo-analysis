@@ -2,27 +2,42 @@
 
 import marimo as mo
 
-# Cell 1: Define a base variable and UI slider widget for interactivity
-# Create a slider widget to interactively select a multiplier value
-multiplier = mo.ui.slider(min=1, max=10, step=1, value=5)
+app = mo.App()
 
-# Base value for calculation
-base_value = 10
+# ---------------------------
+# Cell 1: Define base variable and interactive widget
+# ---------------------------
+@app.cell
+def cell1():
+    # Create a slider widget to select multiplier (1–10)
+    multiplier = mo.ui.slider(start=1, stop=10, step=1, value=5, label="Multiplier")
+    base_value = 10
+    return multiplier, base_value
 
-# Cell 2: Compute a dependent variable based on slider input
-# This cell depends on 'multiplier' from Cell 1
-result = base_value * multiplier
+# ---------------------------
+# Cell 2: Compute dependent variable
+# ---------------------------
+@app.cell
+def cell2(multiplier, base_value):
+    # Depends on: multiplier (Cell 1), base_value (Cell 1)
+    result = base_value * multiplier.value
+    return result
 
-# Cell 3: Display dynamic markdown output that updates with the slider
-# Use mo.md() to render markdown dynamically
-mo.md(f"""
-### Computed Result
+# ---------------------------
+# Cell 3: Display dynamic markdown
+# ---------------------------
+@app.cell
+def cell3(multiplier, base_value, result):
+    # This will update automatically when slider is moved
+    return mo.md(
+        f"""
+        ### Computed Result  
 
-The base value is {base_value}.
+        Base value: **{base_value}**  
+        Multiplier (from slider): **{multiplier.value}**  
+        Result: **{result}**
+        """
+    )
 
-The slider multiplier is currently {multiplier}.
-
-The resulting value is **{result}**.
-""")
-
-
+if __name__ == "__main__":
+    app.run()
