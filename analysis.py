@@ -1,27 +1,19 @@
 # 24f2009046@ds.study.iitm.ac.in
 
+# Cell 1: Define a base variable and UI slider widget for interactivity
 import marimo as mo
-import numpy as np
-import matplotlib.pyplot as plt
 
-# Cell 1: Define input data and parameters
-# These variables will be used in other cells for analysis
-x = np.linspace(0, 10, 100)
-freq_slider = mo.ui.slider(label="Frequency", min=1, max=10, value=5)
+# Create a slider widget to interactively select a multiplier value
+multiplier = mo.ui.slider(min=1, max=10, step=1, value=5)
 
-# Cell 2: Compute dependent variable y based on x and frequency slider
-# y depends on x and freq_slider.value, it will update reactively when freq_slider changes
-y = np.sin(freq_slider.value * x)
+# Base value for calculation
+base_value = 10
 
-# Cell 3: Plot showing the relationship between variables x and y
-# The title depends on freq_slider.value and will update when it changes
-plt.plot(x, y)
-plt.title(f"Sine wave with frequency = {freq_slider.value}")
-plt.xlabel("x")
-plt.ylabel("sin(freq * x)")
-plt.grid(True)
-plt.show()
+# Cell 2: Compute a dependent variable based on slider input
+# This cell depends on 'multiplier' from Cell 1
+result = base_value * multiplier
 
-# Cell 4: Dynamic markdown output showing current frequency value
-# This cell depends on freq_slider.value and will update reactively
-mo.markdown(f"### Current frequency value: **{freq_slider.value}**")
+# Cell 3: Display dynamic markdown output that updates with the slider
+# This markdown reflects the current value of 'result'
+mo.markdown(f"### Computed Result\n\nThe current result of {base_value} multiplied by the slider value {multiplier} is **{result}**.")
+
