@@ -22,5 +22,5 @@ plt.grid(True)
 plt.show()
 
 # Cell 4: Dynamic markdown output showing current frequency value
-mo.markdown(f"### Current frequency value: **{freq_slider}**")
+mo.md(f"### Current frequency value: **{freq_slider}**")
 
